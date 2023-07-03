@@ -1,7 +1,8 @@
 class Burger
-  def initialize(type)
-    @type = type
-  end
+  attr_accessor :meat, :cheese
 
-  attr_accessor :type
+  def initialize(meat, cheese)
+    @meat = meat
+    @cheese = cheese
+  end
 end
