@@ -2,8 +2,8 @@ require './burger'
 
 RSpec.describe Burger do
   it 'has a type' do
-    burger = Burger.new('Big mac')
-    expect(burger.type).to eq('Big mac')
-    # 期待漢堡的種類等於'Big mac'
+    burger = Burger.new('Beef', 'Cheddar')
+    expect(burger.meat).to eq('Beef')
+    expect(burger.cheese).to eq('Cheddar')
   end
 end
