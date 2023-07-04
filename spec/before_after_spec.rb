@@ -1,23 +1,29 @@
 RSpec.describe 'before and after hooks' do
   before(:context) do
-    p 'before context'
+    p 'OUTER Before context'
   end
 
   before(:example) do
-    p 'before example'
+    p 'OUTER Before example'
   end
 
-  after(:context) do
-    p 'after context'
-  end
-
-  after(:example) do
-    p 'after example'
-  end
-
-  it 'test for before & after' do
+  it 'will pass' do
     expect(1 + 1).to eq(2)
+  end
+
+  context 'when it can pass' do
+    before(:context) do
+      p 'INNER Before context'
+    end
+
+    before(:example) do
+      p 'INNER Before example'
+    end
+
+    it 'will pass too' do
+      expect(2 + 2).to eq(4)
+    end
   end
 end
 
-# context 會在整個測試前執行，也會在測試結束後執行
+# 在 context 裡面的 example 也吃到了外面的 before hooks
