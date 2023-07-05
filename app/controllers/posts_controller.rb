@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    # @posts = Post.all SELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 3], ["LIMIT", 1]]
+    # @posts = Post.all           # SELECT "posts".* FROM "posts" WHERE "posts"."id" = ? LIMIT ?  [["id", 3], ["LIMIT", 1]]
     # TODO:上述寫法會導致資料庫浪費 改用includes
     @posts = Post.includes(:user) # SELECT "users".* FROM "users" WHERE "users"."id" = ?  [["id", 1]]
   end
