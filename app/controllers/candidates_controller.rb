@@ -19,7 +19,10 @@ class CandidatesController < ApplicationController
     # 如果直接將參數塞進 Model 會報錯 ActiveModel::ForbiddenAttributesError
     # 所以在下面寫了 private 處理
     if @candidate.save
-      redirect_to candidates_path, notice: '新增候選人成功!'
+      # redirect_to candidates_path, notice: '新增候選人成功!'
+      # 上面這行等於下面這行
+      flash[:notice] = '新增候選人成功~'
+      redirect_to candidates_path
     else
       render :new # 這裡的new 是 頁面名稱的new 不是controller的new
     end
