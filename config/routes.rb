@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :candidates
+  resources :candidates do
+    member do 
+      post :vote
+    end
+  end
   
   # get 'bmi/index' 改成下面那樣
   get 'bmi', to: 'bmi#index'

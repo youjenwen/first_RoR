@@ -33,7 +33,7 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find_by(id: params[:id])
 
     if @candidate.update(candidate_params)
-      redirect_to candidate_path, notice: '更新成功!'
+      redirect_to candidates_path, notice: '更新成功!'
     else
       render :edit
     end
@@ -43,6 +43,13 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find_by(id: params[:id])
     @candidate.destroy
     redirect_to candidates_path, notice: '候選人資料已刪除'
+  end
+
+  def vote
+    @candidate = Candidate.find_by(id: params[:id])
+    @candidate.increment(:votes) # :votes 是欄位 意思是使用 increment 方法來增加那筆資料的 votes 欄位的值
+    @candidate.save
+    redirect_to candidates_path, notice: "投票完成"
   end
 
   private
