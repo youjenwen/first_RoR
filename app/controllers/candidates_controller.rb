@@ -1,4 +1,7 @@
 class CandidatesController < ApplicationController
+  before_action :find_candidate, only: [:edit, :update, :destroy, :vote]
+  # only 裡表示 有哪些會用到這個方法
+
   def index
     @candidates = Candidate.all
     # all方法 -> 取得所有資料 並存在 @candidates 慣例上都會使用複數名詞
@@ -29,11 +32,12 @@ class CandidatesController < ApplicationController
   end
 
   def edit
-    @candidate = Candidate.find_by(id: params[:id])  # 這裡的 :id 是 rails routes  URI Pattern 上顯示的
+    # @candidate = Candidate.find_by(id: params[:id])  # 移到上面寫在 before 裡
+    # 這裡的 :id 是 rails routes  URI Pattern 上顯示的
   end
 
   def update
-    @candidate = Candidate.find_by(id: params[:id])
+    # @candidate = Candidate.find_by(id: params[:id]) # 移到上面寫在 before 裡
 
     if @candidate.update(candidate_params)
       redirect_to candidates_path, notice: '更新成功!'
@@ -43,13 +47,14 @@ class CandidatesController < ApplicationController
   end
 
   def destroy
-    @candidate = Candidate.find_by(id: params[:id])
+    # @candidate = Candidate.find_by(id: params[:id]) # 移到上面寫在 before 裡
     @candidate.destroy
     redirect_to candidates_path, notice: '候選人資料已刪除'
   end
 
   def vote
-    @candidate = Candidate.find_by(id: params[:id])
+    # @candidate = Candidate.find_by(id: params[:id]) # 移到上面寫在 before 裡
+    
     # @candidate.increment(:votes) # :votes 是欄位 意思是使用 increment 方法來增加那筆資料的 votes 欄位的值
     # @candidate.save
     @candidate.vote_logs.create(ip_address: request.remote_ip) if @candidate
@@ -60,5 +65,10 @@ class CandidatesController < ApplicationController
 
   def candidate_params
     params.require(:candidate).permit(:name, :age, :party, :politics)
+  end
+
+  # 因為有些重複的code 拿來private 做成方法
+  def find_candidate
+    @candidate = Candidate.find_by(id: params[:id])
   end
 end
