@@ -47,8 +47,9 @@ class CandidatesController < ApplicationController
 
   def vote
     @candidate = Candidate.find_by(id: params[:id])
-    @candidate.increment(:votes) # :votes 是欄位 意思是使用 increment 方法來增加那筆資料的 votes 欄位的值
-    @candidate.save
+    # @candidate.increment(:votes) # :votes 是欄位 意思是使用 increment 方法來增加那筆資料的 votes 欄位的值
+    # @candidate.save
+    @candidate.vote_logs.create(ip_address: request.remote_ip) if @candidate
     redirect_to candidates_path, notice: "投票完成"
   end
 
