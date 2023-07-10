@@ -67,8 +67,14 @@ class CandidatesController < ApplicationController
     params.require(:candidate).permit(:name, :age, :party, :politics)
   end
 
-  # 因為有些重複的code 拿來private 做成方法
-  def find_candidate
-    @candidate = Candidate.find_by(id: params[:id])
+   # 因為有些重複的code 拿來private 做成方法
+   def find_candidate
+    # @candidate = Candidate.find_by(id: params[:id])
+    # 改用find，使用begin .. rescue
+    begin
+      @candidate = Candidate.find(params[:id])
+    rescue
+      redirect_to candidates_path, notice: "查無此人"
+    end
   end
 end
