@@ -1,24 +1,7 @@
-# README
+## 使用方法
+#### 單元測試
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* 針對 `spec/practice` 裡練習寫的測試
+    * 直接移動到 `spec/practice` 目錄底下，使用 `rspec xxxxx_spec.rb` 進行測試
+* `spec/controllers/api/v1/articles_controller_spec.rb` 測試自製api小功能
+* `spec/controllers/users_controller_spec.rb` 使用 Scaffold 新建功能的測試
