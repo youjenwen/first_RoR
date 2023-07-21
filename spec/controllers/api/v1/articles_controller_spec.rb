@@ -27,7 +27,7 @@ RSpec.describe 'Articles API', type: :request do
     end
 
     describe 'PATCH /api/v1/articles/{article.id}' do
-        context 'sucesss update action' do
+        context 'when sucesss update action' do
             let(:article) { create(:article) }
             it 'update article info' do
                 patch "/api/v1/articles/#{article.id}",
